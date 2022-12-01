@@ -1,6 +1,6 @@
 {
   "name": "keepintouch",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,7 +10,8 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^15.0.0",
+    "@angular/animations": "^15.0.2",
+    "@angular/cdk": "^13.0.0",
     "@angular/common": "^15.0.0",
     "@angular/compiler": "^15.0.0",
     "@angular/core": "^15.0.0",
@@ -18,6 +19,9 @@
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
+    "@nebular/eva-icons": "9.1.0-rc.6",
+    "@nebular/theme": "^9.1.0-rc.6",
+    "eva-icons": "^1.1.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -26,6 +30,7 @@
     "@angular-devkit/build-angular": "^15.0.2",
     "@angular/cli": "~15.0.2",
     "@angular/compiler-cli": "^15.0.0",
+    "@schematics/angular": "~15.0.2",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
