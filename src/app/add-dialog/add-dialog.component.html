@@ -1,0 +1,21 @@
+<nb-card>
+    <nb-card-header>
+        Add New Friend
+    </nb-card-header>
+    <nb-card-body>
+        <div class="friend-inputs">
+            <input type="text" nbInput fullWidth placeholder="Name" (keyup)="editName($event)" (keyup.enter)="add()">
+            <nb-checkbox (checkedChange)="toggle($event)">Favorite</nb-checkbox>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="add-buttons">
+            <button nbButton size="small" (click)="close()">
+                Cancel
+            </button>
+            <button nbButton size="small" [disabled]="!valid" status="primary" (click)="add()">
+                Submit
+            </button>
+        </div>
+    </nb-card-footer>
+</nb-card>

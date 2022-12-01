@@ -1,0 +1,58 @@
+<div class="main-layout">
+	<!-- Close Friends -->
+	<div class="close-friends">
+		<nb-card>
+			<nb-card-header>
+				Best Friends
+			</nb-card-header>
+			<nb-card-body>
+				<div class="card-list">
+					<card *ngFor="let friend of friendsList" [friend]="friend">
+					</card>
+				</div>
+			</nb-card-body>
+		</nb-card>
+	</div>
+
+	<!-- Other Friends-->
+	<div class="bottom-pane">
+		<!-- Family -->
+		<div class="family-pane">
+			<nb-card>
+				<nb-card-header>
+					Family
+				</nb-card-header>
+				<nb-card-body>
+					Family
+				</nb-card-body>
+			</nb-card>
+		</div>
+
+		<!-- Other Categories -->
+		<div class="other-friends">
+			<!-- Category 3 -->
+			<div class="category-3">
+				<nb-card>
+					<nb-card-header>
+						Category 3
+					</nb-card-header>
+					<nb-card-body>
+						Category 3
+					</nb-card-body>
+				</nb-card>
+			</div>
+
+			<!-- Category 4 -->
+			<div class="category-4">
+				<nb-card>
+					<nb-card-header>
+						Category 4
+					</nb-card-header>
+					<nb-card-body>
+						Category 4
+					</nb-card-body>
+				</nb-card>
+			</div>
+		</div>
+	</div>
+</div>

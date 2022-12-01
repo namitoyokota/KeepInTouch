@@ -1,0 +1,13 @@
+
+.friend-inputs {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.add-buttons {
+    display: grid;
+    grid-template-columns: auto min-content;
+    column-gap: 10px;
+    justify-content: right;
+}

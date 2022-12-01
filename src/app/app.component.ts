@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
 import { Friend } from './abstractions/friend';
+import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { FirebaseService } from './services/firebase.service';
 
 @Component({
@@ -7,8 +9,7 @@ import { FirebaseService } from './services/firebase.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'keepintouch';
+export class AppComponent {
 
   currentlyAddingFriend = false;
 
@@ -16,46 +17,19 @@ export class AppComponent implements OnInit {
 
   newFriend = new Friend();
 
-  friendsList: Friend[] = [];
-
   constructor(
-    private firebaseService: FirebaseService
-  ) {}
+    private firebaseService: FirebaseService,
+    private dialogService: NbDialogService
+  ) { }
 
-  ngOnInit() {
-    this.getFriends();
-  }
-
-  async getFriends() {
-    this.firebaseService.getFriends().then(friends => {
-      this.friendsList = friends;
+  openDialog() {
+    this.dialogService.open(AddDialogComponent).onClose.subscribe(newFriend => {
+      this.submitFriend(newFriend);
     });
   }
 
-  addNewFriend() {
-    this.newFriend = new Friend();
-    this.currentlyAddingFriend = true;
-  }
-
-  cancelAdd() {
-    this.currentlyAddingFriend = false;
-  }
-
-  editName(event: any) {
-    this.newFriend.name = event.target.value;
-    this.checkValid();
-  }
-
-  checkValid() {
-    this.valid = !!this.newFriend.name?.length;
-  }
-
-  submitFriend() {
-    console.log(this.newFriend);
-    this.cancelAdd();
-  }
-
-  toggle(checked: boolean) {
-    this.newFriend.favorite = checked;
+  submitFriend(newFriend: Friend) {
+    console.log(newFriend);
+    this.firebaseService.addFriend(newFriend);
   }
 }

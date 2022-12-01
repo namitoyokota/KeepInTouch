@@ -16,3 +16,8 @@ This project is a web application that helps you keep track of last time you cau
 - CSS framework
 - JavaScript framework (most likely Angular)
 - Web host
+
+## Design Inspirations
+https://assets.justinmind.com/wp-content/webp-express/webp-images/uploads/2021/05/airbnb-example-minimalist-ux-design.png.webp
+
+https://assets.justinmind.com/wp-content/webp-express/webp-images/uploads/2021/05/nike-example-efficient-ux-design.png.webp
