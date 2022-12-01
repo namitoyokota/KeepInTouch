@@ -9,13 +9,35 @@
   
       <!-- Action Pane -->
       <div class="icons">
-        <nb-icon icon="plus-circle-outline"></nb-icon>
+        <nb-icon icon="plus-circle-outline" (click)="addNewFriend()"></nb-icon>
         <nb-icon icon="person-outline"></nb-icon>
       </div>
     </div>
   </nb-layout-header>
 
   <nb-layout-column>
+
+    <nb-card *ngIf="currentlyAddingFriend">
+      <nb-card-header>
+        Add New Friend
+      </nb-card-header>
+      <nb-card-body>
+        <div class="friend-inputs">
+          <input type="text" nbInput fullWidth placeholder="Name" (keyup)="editName($event)" (keyup.enter)="submitFriend()">
+          <nb-checkbox (checkedChange)="toggle($event)">Favorite</nb-checkbox>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <div class="add-buttons">
+          <button nbButton size="small" (click)="cancelAdd()">
+            Cancel
+          </button>
+          <button nbButton size="small" [disabled]="!valid" status="primary" (click)="submitFriend()">
+            Submit
+          </button>
+        </div>
+      </nb-card-footer>
+    </nb-card>
     
     <div class="main-layout">
       <!-- Close Friends -->

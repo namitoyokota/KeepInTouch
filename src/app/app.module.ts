@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NbButtonModule, NbCardModule, NbThemeModule, NbLayoutModule, NbIconModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbThemeModule, NbLayoutModule, NbIconModule, NbCheckboxModule, NbInputModule } from '@nebular/theme';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -20,7 +20,9 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbCardModule,
     NbButtonModule,
     NbEvaIconsModule,
-    NbIconModule
+    NbIconModule,
+    NbInputModule,
+    NbCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
