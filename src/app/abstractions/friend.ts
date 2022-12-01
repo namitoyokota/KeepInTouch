@@ -5,8 +5,8 @@ export class Friend {
     /** Is one of favorite friends */
     favorite?: boolean;
 
-    constructor() {
-        this.name = '';
-        this.favorite = false;
+    constructor(name?: string, favorite?: boolean) {
+        this.name = name ? name : '';
+        this.favorite = favorite ? favorite : false;
     }
 }
