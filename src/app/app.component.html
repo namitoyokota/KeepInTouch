@@ -1,30 +1,72 @@
 <nb-layout>
 
   <nb-layout-header fixed>
-    Header
+    <div class="header-pane">
+      <!-- Project Name -->
+      <div class="title">
+        Keep in Touch
+      </div>
+  
+      <!-- Action Pane -->
+      <div class="icons">
+        <nb-icon icon="plus-circle-outline"></nb-icon>
+        <nb-icon icon="person-outline"></nb-icon>
+      </div>
+    </div>
   </nb-layout-header>
 
   <nb-layout-column>
-    <nb-card>
-      <nb-card-body>
-        Card
-      </nb-card-body>
-    </nb-card>
     
-    <nb-card>
-      <nb-card-header>Button Hero</nb-card-header>
-      <nb-card-body class="example-items-rows">
-        <button nbButton hero status="primary">Primary</button>
-        <button nbButton hero status="success">Success</button>
-        <button nbButton hero status="info">Info</button>
-        <button nbButton hero status="warning">Warning</button>
-        <button nbButton hero status="danger">Danger</button>
-      </nb-card-body>
-    </nb-card>
+    <div class="main-layout">
+      <!-- Close Friends -->
+      <div class="close-friends">
+        <nb-card>
+          <nb-card-body>
+            Close Friends
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+      <!-- Other Friends-->
+      <div class="bottom-pane">
+        <!-- Family -->
+        <div class="family-pane">
+          <nb-card>
+            <nb-card-body>
+              Family
+            </nb-card-body>
+          </nb-card>
+        </div>
+
+        <!-- Other Categories -->
+        <div class="other-friends">
+          <!-- Category 3 -->
+          <div class="category-3">
+            <nb-card>
+              <nb-card-body>
+                Category 3
+              </nb-card-body>
+            </nb-card>
+          </div>
+          
+          <!-- Category 4 -->
+          <div class="category-4">
+            <nb-card>
+              <nb-card-body>
+                Category 4
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-  <!-- Insert footer here -->
+    <a href="https://github.com/namitoyokota/KeepInTouch" target="_blank">
+      GitHub  
+    </a>
   </nb-layout-footer>
 
 </nb-layout>

@@ -1,0 +1,38 @@
+.header-pane {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    .icons {
+        display: flex;
+        column-gap: 10px;
+    }
+}
+
+.main-layout {
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    grid-template-rows: min-content auto;
+
+    .close-friends {
+
+    }
+
+    .bottom-pane {
+        display: grid;
+        grid-template-columns: min-content auto;
+        column-gap: 20px;
+
+        .family-pane {
+
+        }
+
+        .other-friends {
+            display: grid;
+            grid-template-rows: min-content auto;
+        }
+    }
+}
