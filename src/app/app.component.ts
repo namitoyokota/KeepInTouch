@@ -24,7 +24,9 @@ export class AppComponent {
 
   openDialog() {
     this.dialogService.open(AddDialogComponent).onClose.subscribe(newFriend => {
-      this.submitFriend(newFriend);
+      if (newFriend) {
+        this.submitFriend(newFriend);
+      }
     });
   }
 
