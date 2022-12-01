@@ -32,8 +32,6 @@ export class FirebaseService {
     addDoc(this.friendsCollection, {
       name: newFriend.name,
       favorite: newFriend.favorite
-    }).then(docRef => {
-      console.log(docRef);
     }).catch(error => {
       console.warn(error);
     });

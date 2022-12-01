@@ -29,7 +29,6 @@ export class AppComponent {
   }
 
   submitFriend(newFriend: Friend) {
-    console.log(newFriend);
     this.firebaseService.addFriend(newFriend);
   }
 }
