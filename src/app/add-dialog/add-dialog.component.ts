@@ -15,7 +15,7 @@ export class AddDialogComponent {
   valid = false;
 
   constructor(
-    private dialogRef: NbDialogRef<null>
+    private dialogRef: NbDialogRef<AddDialogComponent>
   ) { }
 
   editName(event: any) {

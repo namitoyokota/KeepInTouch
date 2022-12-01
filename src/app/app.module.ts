@@ -9,18 +9,22 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CardComponent } from './card/card.component';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { LayoutComponent } from './layout/layout.component';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
     AddDialogComponent,
-    LayoutComponent
+    LayoutComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbCardModule,

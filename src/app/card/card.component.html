@@ -1,9 +1,11 @@
-<div>
-  {{friend.name}}
+<div class="content" (click)="editDialog()">
+  <div>
+    {{friend.name}}
+  </div>
+  
+  <nb-icon *ngIf="friend.favorite" icon="star" status="warning">
+  </nb-icon>
+  
+  <nb-icon *ngIf="!friend.favorite" icon="star-outline">
+  </nb-icon>
 </div>
-
-<nb-icon *ngIf="friend.favorite" icon="star" status="warning">
-</nb-icon>
-
-<nb-icon *ngIf="!friend.favorite" icon="star-outline">
-</nb-icon>

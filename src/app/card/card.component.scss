@@ -1,8 +1,12 @@
-:host {
+.content {
     display: grid;
     grid-template-columns: auto min-content;
     background-color: #f2f2f2;
     border: 2px #cccccc solid;
     border-radius: 5px;
     padding: 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
