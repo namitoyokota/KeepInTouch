@@ -33,6 +33,14 @@
   }
 }
 
+@media screen and (max-width: 420px) {
+  .all-friends {
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+  }
+}
+
 .card-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
