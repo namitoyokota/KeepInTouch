@@ -13,10 +13,14 @@ export class AddDialogComponent {
   /** Whether dialog is adding or editing a friend */
   editMode = false;
 
+  /** Indicates that change has been made */
+  dirty = false;
+
   /** Indicates whether new friend object is valid */
   valid = false;
 
-  today = new Date();
+  /** Used to set max date */
+  readonly today = new Date();
 
   readonly dateParser = 'MMM d, y';
 
@@ -27,6 +31,8 @@ export class AddDialogComponent {
   }
 
   checkValid() {
+    this.dirty = true;
+
     const nameIsValid = !!this.newFriend.name?.length;
     const goalIsValid = !!this.newFriend.goalDays;
     const dateIsValid = !!this.newFriend.lastCaughtUp;
@@ -35,7 +41,7 @@ export class AddDialogComponent {
   }
 
   submit() {
-    if (this.valid) {
+    if (this.valid && this.dirty) {
       this.dialogRef.close(this.newFriend);
     }
   }

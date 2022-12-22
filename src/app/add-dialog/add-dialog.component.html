@@ -59,7 +59,7 @@
       <button
         nbButton
         size="small"
-        [disabled]="!valid"
+        [disabled]="!dirty && !valid"
         status="primary"
         (click)="submit()"
       >
