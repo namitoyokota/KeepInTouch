@@ -12,7 +12,7 @@
           placeholder="Name"
           [(ngModel)]="newFriend.name"
           (change)="checkValid()"
-          (keyup.enter)="add()"
+          (keyup.enter)="submit()"
         />
       </div>
 
@@ -27,7 +27,7 @@
           [min]="1"
           [(ngModel)]="newFriend.goalDays"
           (change)="checkValid()"
-          (keyup.enter)="add()"
+          (keyup.enter)="submit()"
         />
       </div>
 
@@ -54,16 +54,17 @@
     </div>
   </nb-card-body>
   <nb-card-footer>
-    <div class="add-buttons">
+    <div class="button-pane">
       <button nbButton size="small" (click)="close()">Cancel</button>
       <button
         nbButton
         size="small"
         [disabled]="!valid"
         status="primary"
-        (click)="add()"
+        (click)="submit()"
       >
-        Create
+        <ng-container *ngIf="editMode"> Update </ng-container>
+        <ng-container *ngIf="!editMode"> Create </ng-container>
       </button>
     </div>
   </nb-card-footer>

@@ -19,7 +19,6 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
-import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
@@ -28,7 +27,6 @@ import { LayoutComponent } from './layout/layout.component';
     CardComponent,
     AddDialogComponent,
     LayoutComponent,
-    EditDialogComponent,
   ],
   imports: [
     BrowserModule,

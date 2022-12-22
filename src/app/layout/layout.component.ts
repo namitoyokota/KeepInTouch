@@ -11,8 +11,13 @@ export class LayoutComponent {
   /** List of friends in the database */
   friendsList: Friend[] = [];
 
+  /** List of favorite friends */
   favoriteFriendsList: Friend[] = [];
+
+  /** List of friends that need attention */
   catchUpFriendsList: Friend[] = [];
+
+  /** List of friends that doesn't need attention */
   caughtUpFriendsList: Friend[] = [];
 
   constructor(private firebaseService: FirebaseService) {}
@@ -38,6 +43,7 @@ export class LayoutComponent {
     });
   }
 
+  /** Empties all lists */
   private resetList() {
     this.favoriteFriendsList = [];
     this.caughtUpFriendsList = [];

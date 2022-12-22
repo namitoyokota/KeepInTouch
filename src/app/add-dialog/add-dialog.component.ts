@@ -10,6 +10,9 @@ export class AddDialogComponent {
   /** New friend to add */
   newFriend = new Friend();
 
+  /** Whether dialog is adding or editing a friend */
+  editMode = false;
+
   /** Indicates whether new friend object is valid */
   valid = false;
 
@@ -31,7 +34,7 @@ export class AddDialogComponent {
     this.valid = nameIsValid && goalIsValid && dateIsValid;
   }
 
-  add() {
+  submit() {
     if (this.valid) {
       this.dialogRef.close(this.newFriend);
     }
