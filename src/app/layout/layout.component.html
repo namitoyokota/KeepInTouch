@@ -2,10 +2,11 @@
   <!-- Close Friends -->
   <div class="close-friends">
     <nb-card>
-      <nb-card-header> Best Friends </nb-card-header>
+      <nb-card-header> Favorites </nb-card-header>
       <nb-card-body>
         <div class="card-list">
-          <card *ngFor="let friend of friendsList" [friend]="friend"> </card>
+          <card *ngFor="let friend of favoriteFriendsList" [friend]="friend">
+          </card>
         </div>
       </nb-card-body>
     </nb-card>
@@ -17,7 +18,15 @@
     <div class="catch-up-friends">
       <nb-card>
         <nb-card-header> Catch Up </nb-card-header>
-        <nb-card-body> List of friends that need attention </nb-card-body>
+        <nb-card-body>
+          <div class="vertical-pane">
+            <span> List of friends that need attention </span>
+            <div class="card-list">
+              <card *ngFor="let friend of catchUpFriendsList" [friend]="friend">
+              </card>
+            </div>
+          </div>
+        </nb-card-body>
       </nb-card>
     </div>
 
@@ -26,7 +35,16 @@
       <nb-card>
         <nb-card-header> Caught Up </nb-card-header>
         <nb-card-body>
-          List of friends that has had enough attention
+          <div class="vertical-pane">
+            <span> List of friends that doesn't need attention </span>
+            <div class="card-list">
+              <card
+                *ngFor="let friend of caughtUpFriendsList"
+                [friend]="friend"
+              >
+              </card>
+            </div>
+          </div>
         </nb-card-body>
       </nb-card>
     </div>

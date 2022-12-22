@@ -43,6 +43,8 @@ export class FirebaseService {
       id: newFriend.id,
       name: newFriend.name,
       favorite: newFriend.favorite,
+      goalDays: newFriend.goalDays,
+      lastCaughtUp: newFriend.lastCaughtUp,
     })
       .then(() => {
         this.getFriends();
@@ -91,7 +93,15 @@ export class FirebaseService {
     this.friendsCollection = collection(this.firebaseDb, 'friends');
     this.friendsSnapshot = await getDocs(this.friendsCollection);
 
-    const friends = this.friendsSnapshot.docs.map((doc) => doc.data());
+    const friends = this.friendsSnapshot.docs.map((doc) => {
+      return new Friend(
+        doc.data()['id'],
+        doc.data()['name'],
+        doc.data()['favorite'],
+        doc.data()['goalDays'],
+        doc.data()['lastCaughtUp']
+      );
+    });
     this.friends.next(friends);
   }
 }
