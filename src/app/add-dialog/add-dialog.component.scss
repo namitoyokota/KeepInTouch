@@ -1,13 +1,18 @@
-
 .friend-inputs {
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  .input-field {
+    display: grid;
+    grid-template-rows: min-content auto;
+    row-gap: 5px;
+  }
 }
 
 .add-buttons {
-    display: grid;
-    grid-template-columns: auto min-content;
-    column-gap: 10px;
-    justify-content: right;
+  display: grid;
+  grid-template-columns: auto min-content;
+  column-gap: 10px;
+  justify-content: right;
 }

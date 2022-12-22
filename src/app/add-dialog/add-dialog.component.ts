@@ -4,35 +4,37 @@ import { Friend } from '../abstractions/friend';
 
 @Component({
   templateUrl: './add-dialog.component.html',
-  styleUrls: ['./add-dialog.component.scss']
+  styleUrls: ['./add-dialog.component.scss'],
 })
 export class AddDialogComponent {
-
   /** New friend to add */
   newFriend = new Friend();
 
   /** Indicates whether new friend object is valid */
   valid = false;
 
-  constructor(
-    private dialogRef: NbDialogRef<AddDialogComponent>
-  ) { }
+  today = new Date();
 
-  editName(event: any) {
-    this.newFriend.name = event.target.value;
-    this.checkValid();
-  }
+  readonly dateParser = 'MMM d, y';
+
+  constructor(private dialogRef: NbDialogRef<AddDialogComponent>) {}
 
   toggle(checked: boolean) {
     this.newFriend.favorite = checked;
   }
 
-  private checkValid() {
-    this.valid = !!this.newFriend.name?.length;
+  checkValid() {
+    const nameIsValid = !!this.newFriend.name?.length;
+    const goalIsValid = !!this.newFriend.goalDays;
+    const dateIsValid = !!this.newFriend.lastCaughtUp;
+
+    this.valid = nameIsValid && goalIsValid && dateIsValid;
   }
 
   add() {
-    this.dialogRef.close(this.newFriend);
+    if (this.valid) {
+      this.dialogRef.close(this.newFriend);
+    }
   }
 
   close() {

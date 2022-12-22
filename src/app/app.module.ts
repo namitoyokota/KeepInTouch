@@ -1,16 +1,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NbButtonModule, NbCardModule, NbThemeModule, NbLayoutModule, NbIconModule, NbCheckboxModule, NbInputModule, NbDialogModule } from '@nebular/theme';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { CardComponent } from './card/card.component';
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbDatepickerModule,
+  NbDialogModule,
+  NbIconModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbThemeModule,
+} from '@nebular/theme';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
-import { LayoutComponent } from './layout/layout.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CardComponent } from './card/card.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
-import { FormsModule } from '@angular/forms';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +28,7 @@ import { FormsModule } from '@angular/forms';
     CardComponent,
     AddDialogComponent,
     LayoutComponent,
-    EditDialogComponent
+    EditDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,9 +43,10 @@ import { FormsModule } from '@angular/forms';
     NbIconModule,
     NbInputModule,
     NbCheckboxModule,
+    NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

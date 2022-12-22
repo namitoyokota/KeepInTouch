@@ -52,7 +52,9 @@ export class FirebaseService {
       });
   }
 
-  updateFriend(friend: Friend) {}
+  updateFriend(friend: Friend) {
+    // TODO: add
+  }
 
   removeFriend(friend: Friend) {
     const friendDoc = this.findFriendDoc(friend);

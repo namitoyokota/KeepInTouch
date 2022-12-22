@@ -1,21 +1,70 @@
 <nb-card>
-    <nb-card-header>
-        Create Friend
-    </nb-card-header>
-    <nb-card-body>
-        <div class="friend-inputs">
-            <input type="text" nbInput fullWidth placeholder="Name" (keyup)="editName($event)" (keyup.enter)="add()">
-            <nb-checkbox [checked]="newFriend.favorite" (checkedChange)="toggle($event)">Favorite</nb-checkbox>
-        </div>
-    </nb-card-body>
-    <nb-card-footer>
-        <div class="add-buttons">
-            <button nbButton size="small" (click)="close()">
-                Cancel
-            </button>
-            <button nbButton size="small" [disabled]="!valid" status="primary" (click)="add()">
-                Create
-            </button>
-        </div>
-    </nb-card-footer>
+  <nb-card-header> Create Friend </nb-card-header>
+  <nb-card-body>
+    <div class="friend-inputs">
+      <!-- Name -->
+      <div class="input-field">
+        <span>Name</span>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Name"
+          [(ngModel)]="newFriend.name"
+          (change)="checkValid()"
+          (keyup.enter)="add()"
+        />
+      </div>
+
+      <!-- Goal -->
+      <div class="input-field">
+        <span>How Often To Catch Up</span>
+        <input
+          type="number"
+          nbInput
+          fullWidth
+          placeholder="30"
+          [min]="1"
+          [(ngModel)]="newFriend.goalDays"
+          (change)="checkValid()"
+          (keyup.enter)="add()"
+        />
+      </div>
+
+      <!-- Last Caught Up Date -->
+      <div class="input-field">
+        <span>Last Caught Up Date</span>
+        <input
+          nbInput
+          fullWidth
+          [placeholder]="today | date : dateParser"
+          [nbDatepicker]="datePicker"
+          [(ngModel)]="newFriend.lastCaughtUp"
+          (change)="checkValid()"
+        />
+        <nb-datepicker #datePicker [max]="today"></nb-datepicker>
+      </div>
+
+      <!-- Favorite -->
+      <nb-checkbox
+        [checked]="newFriend.favorite"
+        (checkedChange)="toggle($event)"
+        >Favorite</nb-checkbox
+      >
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="add-buttons">
+      <button nbButton size="small" (click)="close()">Cancel</button>
+      <button
+        nbButton
+        size="small"
+        [disabled]="!valid"
+        status="primary"
+        (click)="add()"
+      >
+        Create
+      </button>
+    </div>
+  </nb-card-footer>
 </nb-card>

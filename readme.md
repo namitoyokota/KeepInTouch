@@ -3,6 +3,7 @@
 This project is a web application that helps you keep track of last time you caught up with each friend
 
 ## Ideas
+
 - User Authentication
 - CRUD friends
 - View, sort, and filter friend list
@@ -11,13 +12,15 @@ This project is a web application that helps you keep track of last time you cau
 - Display date of caught up
 
 ## Things to Research
-- Databse
+
+- Database
 - UX design
 - CSS framework
 - JavaScript framework (most likely Angular)
 - Web host
 
 ## Design Inspirations
+
 https://assets.justinmind.com/wp-content/webp-express/webp-images/uploads/2021/05/airbnb-example-minimalist-ux-design.png.webp
 
 https://assets.justinmind.com/wp-content/webp-express/webp-images/uploads/2021/05/nike-example-efficient-ux-design.png.webp
