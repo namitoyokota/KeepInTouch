@@ -1,31 +1,28 @@
 :host {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 
-    display: grid;
-    grid-template-rows: min-content auto;
+  display: grid;
+  grid-template-rows: min-content auto;
 }
 
 .close-friends {
-
 }
 
-.bottom-pane {
-    display: grid;
-    grid-template-columns: min-content auto;
-    column-gap: 20px;
+.other-friends {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 20px;
 
-    .family-pane {
-    }
+  .catch-up-friends {
+  }
 
-    .other-friends {
-        display: grid;
-        grid-template-rows: min-content auto;
-    }
+  .caught-up-friends {
+  }
 }
 
 .card-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 10px;
 }

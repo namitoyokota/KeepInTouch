@@ -1,83 +1,95 @@
 import { Injectable } from '@angular/core';
 
-import { FirebaseApp, initializeApp } from "firebase/app";
-import { addDoc, deleteDoc, Firestore, getFirestore, collection, getDocs, CollectionReference, DocumentData, updateDoc, QuerySnapshot } from 'firebase/firestore/lite';
-import { getAnalytics } from "firebase/analytics";
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import {
+  addDoc,
+  collection,
+  CollectionReference,
+  deleteDoc,
+  DocumentData,
+  Firestore,
+  getDocs,
+  getFirestore,
+  QuerySnapshot,
+} from 'firebase/firestore/lite';
 
-import { environment } from '../environments/environment';
-import { Friend } from '../abstractions/friend';
 import { BehaviorSubject } from 'rxjs';
+import { Friend } from '../abstractions/friend';
+import { environment } from '../environments/environment';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirebaseService {
+  private friends = new BehaviorSubject<Friend[]>([]);
 
-	private friends = new BehaviorSubject<Friend[]>([]);
+  friends$ = this.friends.asObservable();
 
-	friends$ = this.friends.asObservable();
+  private firebaseApp: FirebaseApp;
 
-	private firebaseApp: FirebaseApp;
+  private firebaseDb: Firestore;
 
-	private firebaseDb: Firestore;
+  private friendsCollection: CollectionReference<DocumentData>;
 
-	private friendsCollection: CollectionReference<DocumentData>;
+  private friendsSnapshot: QuerySnapshot<DocumentData>;
 
-	private friendsSnapshot: QuerySnapshot<DocumentData>;
+  constructor() {
+    this.initialize();
+    this.getFriends();
+  }
 
-	constructor() {
-		this.initialize();
-		this.getFriends();
-	}
+  addFriend(newFriend: Friend) {
+    addDoc(this.friendsCollection, {
+      id: newFriend.id,
+      name: newFriend.name,
+      favorite: newFriend.favorite,
+    })
+      .then(() => {
+        this.getFriends();
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  }
 
-	addFriend(newFriend: Friend) {
-		addDoc(this.friendsCollection, {
-			id: newFriend.id,
-			name: newFriend.name,
-			favorite: newFriend.favorite
-		}).then(() => {
-			this.getFriends();
-		}).catch(error => {
-			console.warn(error);
-		});
-	}
+  updateFriend(friend: Friend) {}
 
-	updateFriend(friend: Friend) {
-	}
+  removeFriend(friend: Friend) {
+    const friendDoc = this.findFriendDoc(friend);
+    deleteDoc(friendDoc)
+      .then((ref) => {
+        this.getFriends();
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  }
 
-	removeFriend(friend: Friend) {
-		const friendDoc = this.findFriendDoc(friend);
-		deleteDoc(friendDoc).then(ref => {
-			this.getFriends();
-		}).catch(error => {
-			console.warn(error);
-		});
-	}
+  findFriendDoc(friend: Friend) {
+    let friendDoc;
+    this.friendsSnapshot.docs.forEach((doc) => {
+      const user: Friend = doc.data();
+      if (user.id === friend.id) {
+        friendDoc = doc.ref;
+      }
+    });
 
-	findFriendDoc(friend: Friend) {
-		let friendDoc;
-		this.friendsSnapshot.docs.forEach(doc => {
-			const user: Friend = doc.data();
-			if (user.id === friend.id) {
-				friendDoc = doc.ref;
-			}
-		});
+    return friendDoc;
+  }
 
-		return friendDoc;
-	}
+  private initialize() {
+    this.firebaseApp = initializeApp(environment.firebase);
+    this.firebaseDb = getFirestore(this.firebaseApp);
 
-	private initialize() {
-		this.firebaseApp = initializeApp(environment.firebase);
-		this.firebaseDb = getFirestore(this.firebaseApp);
+    // TODO: Added after going production
+    // const analytics = getAnalytics(this.firebaseApp);
+  }
 
-		// const analytics = getAnalytics(this.firebaseApp);
-	}
+  private async getFriends() {
+    this.friendsCollection = collection(this.firebaseDb, 'friends');
+    this.friendsSnapshot = await getDocs(this.friendsCollection);
 
-	private async getFriends() {
-		this.friendsCollection = collection(this.firebaseDb, 'friends');
-		this.friendsSnapshot = await getDocs(this.friendsCollection);
-
-		const friends = this.friendsSnapshot.docs.map(doc => doc.data());
-		this.friends.next(friends);
-	}
+    const friends = this.friendsSnapshot.docs.map((doc) => doc.data());
+    this.friends.next(friends);
+  }
 }
