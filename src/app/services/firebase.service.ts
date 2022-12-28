@@ -10,7 +10,7 @@ import {
   Firestore,
   getDocs,
   getFirestore,
-  QuerySnapshot,
+  QuerySnapshot
 } from 'firebase/firestore/lite';
 
 import { BehaviorSubject } from 'rxjs';
@@ -21,16 +21,22 @@ import { environment } from '../environments/environment';
   providedIn: 'root',
 })
 export class FirebaseService {
+  /** List of existing friends */
   private friends = new BehaviorSubject<Friend[]>([]);
 
-  friends$ = this.friends.asObservable();
+  /** List of existing friends */
+  public friends$ = this.friends.asObservable();
 
+  /** Firebase app to access database */
   private firebaseApp: FirebaseApp;
 
+  /** Firebase database */
   private firebaseDb: Firestore;
 
+  /** Table in the firebase database */
   private friendsCollection: CollectionReference<DocumentData>;
 
+  /** Current state of the firebase database */
   private friendsSnapshot: QuerySnapshot<DocumentData>;
 
   constructor() {
@@ -38,6 +44,7 @@ export class FirebaseService {
     this.getFriends();
   }
 
+  /** Create a new friend in the database */
   addFriend(newFriend: Friend) {
     addDoc(this.friendsCollection, {
       id: newFriend.id,
@@ -54,10 +61,12 @@ export class FirebaseService {
       });
   }
 
+  /** Update an existing friend in the database */
   updateFriend(friend: Friend) {
     // TODO: add
   }
 
+  /** Removes an existing friend from the database */
   removeFriend(friend: Friend) {
     const friendDoc = this.findFriendDoc(friend);
     deleteDoc(friendDoc)
@@ -69,6 +78,7 @@ export class FirebaseService {
       });
   }
 
+  /** Returns friend in the database */
   findFriendDoc(friend: Friend) {
     let friendDoc;
     this.friendsSnapshot.docs.forEach((doc) => {
@@ -81,6 +91,7 @@ export class FirebaseService {
     return friendDoc;
   }
 
+  /** Initializes firebase access */
   private initialize() {
     this.firebaseApp = initializeApp(environment.firebase);
     this.firebaseDb = getFirestore(this.firebaseApp);
@@ -89,6 +100,7 @@ export class FirebaseService {
     // const analytics = getAnalytics(this.firebaseApp);
   }
 
+  /** Gets the latest list of friends in the database */
   private async getFriends() {
     this.friendsCollection = collection(this.firebaseDb, 'friends');
     this.friendsSnapshot = await getDocs(this.friendsCollection);

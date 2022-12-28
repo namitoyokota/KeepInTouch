@@ -29,6 +29,7 @@ export class CardComponent {
       });
   }
 
+  /** Deep copies the friend object */
   private deepCopy(friend: Friend) {
     return JSON.parse(JSON.stringify(friend));
   }

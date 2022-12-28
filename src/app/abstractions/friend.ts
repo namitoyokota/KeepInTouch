@@ -36,6 +36,7 @@ export class Friend {
   }
 }
 
+/** Returns ID to set */
 function getId(id: string): string {
   if (id) {
     return id;
@@ -44,6 +45,7 @@ function getId(id: string): string {
   }
 }
 
+/** Returns Name to set */
 function getName(name: string): string {
   if (name) {
     return name;
@@ -52,6 +54,7 @@ function getName(name: string): string {
   }
 }
 
+/** Returns favorite flag to set */
 function getFavorite(favorite: boolean): boolean {
   if (favorite) {
     return favorite;
@@ -60,6 +63,7 @@ function getFavorite(favorite: boolean): boolean {
   }
 }
 
+/** Returns goal days to set */
 function getGoal(goal: number): number {
   if (!!goal) {
     return goal;
@@ -68,6 +72,7 @@ function getGoal(goal: number): number {
   }
 }
 
+/** Returns last caught up date to set */
 function getLastCaughtUp(date: Date | Timestamp): Date {
   if (date instanceof Timestamp) {
     return date.toDate();
@@ -78,6 +83,7 @@ function getLastCaughtUp(date: Date | Timestamp): Date {
   }
 }
 
+/** Returns attention needed flag */
 function getAttention(goalDays: number, lastCaughtUp: Date): boolean {
   const today = new Date();
   const differentInTime = today.getTime() - lastCaughtUp.getTime();

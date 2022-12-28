@@ -22,14 +22,17 @@ export class AddDialogComponent {
   /** Used to set max date */
   readonly today = new Date();
 
+  /** Format used to parse date in input field */
   readonly dateParser = 'MMM d, y';
 
   constructor(private dialogRef: NbDialogRef<AddDialogComponent>) {}
 
+  /** Toggles favorite flag */
   toggle(checked: boolean) {
     this.newFriend.favorite = checked;
   }
 
+  /** Checks all required fields are set */
   checkValid() {
     this.dirty = true;
 
@@ -40,12 +43,14 @@ export class AddDialogComponent {
     this.valid = nameIsValid && goalIsValid && dateIsValid;
   }
 
+  /** Returns new friend object to create/update */
   submit() {
     if (this.valid && this.dirty) {
       this.dialogRef.close(this.newFriend);
     }
   }
 
+  /** Closes dialog without a friend object */
   close() {
     this.dialogRef.close();
   }
