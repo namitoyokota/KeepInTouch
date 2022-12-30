@@ -3,15 +3,29 @@
   <nb-layout-header fixed>
     <div class="header-pane">
       <!-- Search Icon -->
-      <nb-icon icon="search-outline" (click)="toggleSearch()"></nb-icon>
+      <nb-icon
+        icon="search-outline"
+        nbTooltip="Search Friend"
+        nbTooltipPlacement="bottom"
+        (click)="toggleSearch()"
+      ></nb-icon>
 
       <!-- Project Name -->
       <div class="title">Keep in Touch</div>
 
       <!-- Action Pane -->
       <div class="icons">
-        <nb-icon icon="plus-circle-outline" (click)="openDialog()"></nb-icon>
-        <nb-icon icon="person-outline"></nb-icon>
+        <nb-icon
+          icon="plus-circle-outline"
+          nbTooltip="Add Friend"
+          nbTooltipPlacement="bottom"
+          (click)="openDialog()"
+        ></nb-icon>
+        <nb-icon
+          icon="person-outline"
+          nbTooltip="Account"
+          nbTooltipPlacement="bottom"
+        ></nb-icon>
       </div>
     </div>
   </nb-layout-header>

@@ -15,6 +15,7 @@ import {
   NbInputModule,
   NbLayoutModule,
   NbThemeModule,
+  NbTooltipModule,
 } from '@nebular/theme';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +44,7 @@ import { LayoutComponent } from './layout/layout.component';
     NbInputModule,
     NbFormFieldModule,
     NbCheckboxModule,
+    NbTooltipModule,
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
   ],
