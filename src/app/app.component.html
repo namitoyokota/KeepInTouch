@@ -1,13 +1,13 @@
 <nb-layout>
-
   <!-- Header -->
   <nb-layout-header fixed>
     <div class="header-pane">
+      <!-- Search Icon -->
+      <nb-icon icon="search-outline" (click)="toggleSearch()"></nb-icon>
+
       <!-- Project Name -->
-      <div class="title">
-        Keep in Touch
-      </div>
-  
+      <div class="title">Keep in Touch</div>
+
       <!-- Action Pane -->
       <div class="icons">
         <nb-icon icon="plus-circle-outline" (click)="openDialog()"></nb-icon>
@@ -18,14 +18,13 @@
 
   <!-- Main Content -->
   <nb-layout-column>
-    <layout></layout>
+    <layout [isSearching]="isSearching"></layout>
   </nb-layout-column>
 
   <!-- Footer -->
   <nb-layout-footer fixed>
     <a href="https://github.com/namitoyokota/KeepInTouch" target="_blank">
-      GitHub  
+      GitHub
     </a>
   </nb-layout-footer>
-
 </nb-layout>

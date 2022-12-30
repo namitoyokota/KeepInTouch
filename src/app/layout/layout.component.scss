@@ -4,45 +4,39 @@
 
   display: grid;
   grid-template-rows: min-content auto;
+  row-gap: 20px;
 }
 
-.favorite-friends {
-}
-
-.all-friends {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  column-gap: 20px;
-
-  .catch-up-friends {
-  }
-
-  .caught-up-friends {
-  }
-
-  .vertical-pane {
+.main-layout {
+  .all-friends {
     display: grid;
-    grid-template-rows: min-content auto;
-    row-gap: 10px;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 20px;
 
-    .card-list {
-      display: flex;
-      flex-direction: column;
+    .vertical-pane {
+      display: grid;
+      grid-template-rows: min-content auto;
       row-gap: 10px;
+
+      .card-list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+      }
     }
   }
-}
 
-@media screen and (max-width: 420px) {
-  .all-friends {
-    display: flex;
-    flex-direction: column;
-    column-gap: 20px;
+  @media screen and (max-width: 420px) {
+    .all-friends {
+      display: flex;
+      flex-direction: column;
+      column-gap: 20px;
+    }
   }
-}
 
-.card-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 10px;
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10px;
+  }
 }

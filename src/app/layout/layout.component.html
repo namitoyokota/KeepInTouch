@@ -1,3 +1,16 @@
+<!-- Search Bar -->
+<div class="search-bar">
+  <input
+    *ngIf="isSearching"
+    type="text"
+    nbInput
+    fullWidth
+    placeholder="Search"
+    [(ngModel)]="searchString"
+    (keyup)="search()"
+  />
+</div>
+
 <div class="main-layout">
   <!-- Favorite Friends -->
   <div class="favorite-friends">
