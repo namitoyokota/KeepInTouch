@@ -10,7 +10,7 @@ import {
   Firestore,
   getDocs,
   getFirestore,
-  QuerySnapshot
+  QuerySnapshot,
 } from 'firebase/firestore/lite';
 
 import { BehaviorSubject } from 'rxjs';
@@ -45,20 +45,41 @@ export class FirebaseService {
   }
 
   /** Create a new friend in the database */
-  addFriend(newFriend: Friend) {
-    addDoc(this.friendsCollection, {
-      id: newFriend.id,
-      name: newFriend.name,
-      favorite: newFriend.favorite,
-      goalDays: newFriend.goalDays,
-      lastCaughtUp: newFriend.lastCaughtUp,
-    })
-      .then(() => {
-        this.getFriends();
+  // addFriend(newFriend: Friend) {
+  //   addDoc(this.friendsCollection, {
+  //     id: newFriend.id,
+  //     name: newFriend.name,
+  //     favorite: newFriend.favorite,
+  //     goalDays: newFriend.goalDays,
+  //     lastCaughtUp: newFriend.lastCaughtUp,
+  //   })
+  //     .then(() => {
+  //       this.getFriends();
+  //     })
+  //     .catch((error) => {
+  //       console.warn(error);
+  //     });
+  // }
+
+  /** Create a new friend in the database */
+  addFriend(newFriend: Friend): Promise<void> {
+    return new Promise((resolve, reject) => {
+      addDoc(this.friendsCollection, {
+        id: newFriend.id,
+        name: newFriend.name,
+        favorite: newFriend.favorite,
+        goalDays: newFriend.goalDays,
+        lastCaughtUp: newFriend.lastCaughtUp,
       })
-      .catch((error) => {
-        console.warn(error);
-      });
+        .then(() => {
+          this.getFriends();
+          resolve();
+        })
+        .catch((error) => {
+          console.warn(error);
+          reject();
+        });
+    });
   }
 
   /** Update an existing friend in the database */

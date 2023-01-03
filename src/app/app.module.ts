@@ -15,6 +15,7 @@ import {
   NbInputModule,
   NbLayoutModule,
   NbThemeModule,
+  NbToastrModule,
   NbTooltipModule,
 } from '@nebular/theme';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
@@ -47,6 +48,7 @@ import { LayoutComponent } from './layout/layout.component';
     NbTooltipModule,
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
+    NbToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

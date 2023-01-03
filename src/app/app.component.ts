@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { Friend } from './abstractions/friend';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { FirebaseService } from './services/firebase.service';
@@ -15,7 +15,8 @@ export class AppComponent {
 
   constructor(
     private firebaseService: FirebaseService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private toastService: NbToastrService
   ) {}
 
   /** Shows or hides search bar */
@@ -36,6 +37,23 @@ export class AppComponent {
 
   /** Adds requested friend in the database */
   private submitFriend(newFriend: Friend) {
-    this.firebaseService.addFriend(newFriend);
+    this.firebaseService
+      .addFriend(newFriend)
+      .then(() => {
+        this.successToast('Success', 'Added friend');
+      })
+      .catch(() => {
+        this.failureToast('Failure', 'Failed attempting to add a friend');
+      });
+  }
+
+  /** Displayed success toast with given messages */
+  private successToast(title: string, message: string) {
+    this.toastService.success(title, message);
+  }
+
+  /** Displayed warning toast with given messages */
+  private failureToast(title: string, message: string) {
+    this.toastService.warning(title, message);
   }
 }
