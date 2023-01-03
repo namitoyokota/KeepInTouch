@@ -45,23 +45,6 @@ export class FirebaseService {
   }
 
   /** Create a new friend in the database */
-  // addFriend(newFriend: Friend) {
-  //   addDoc(this.friendsCollection, {
-  //     id: newFriend.id,
-  //     name: newFriend.name,
-  //     favorite: newFriend.favorite,
-  //     goalDays: newFriend.goalDays,
-  //     lastCaughtUp: newFriend.lastCaughtUp,
-  //   })
-  //     .then(() => {
-  //       this.getFriends();
-  //     })
-  //     .catch((error) => {
-  //       console.warn(error);
-  //     });
-  // }
-
-  /** Create a new friend in the database */
   addFriend(newFriend: Friend): Promise<void> {
     return new Promise((resolve, reject) => {
       addDoc(this.friendsCollection, {
@@ -88,15 +71,19 @@ export class FirebaseService {
   }
 
   /** Removes an existing friend from the database */
-  removeFriend(friend: Friend) {
+  removeFriend(friend: Friend): Promise<void> {
     const friendDoc = this.findFriendDoc(friend);
-    deleteDoc(friendDoc)
-      .then((ref) => {
-        this.getFriends();
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
+    return new Promise((resolve, reject) => {
+      deleteDoc(friendDoc)
+        .then(() => {
+          this.getFriends();
+          resolve();
+        })
+        .catch((error) => {
+          console.warn(error);
+          reject();
+        });
+    });
   }
 
   /** Returns friend in the database */

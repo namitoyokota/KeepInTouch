@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NbDialogRef } from '@nebular/theme';
+import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { Friend } from '../abstractions/friend';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   templateUrl: './add-dialog.component.html',
@@ -25,7 +26,11 @@ export class AddDialogComponent {
   /** Format used to parse date in input field */
   readonly dateParser = 'MMM d, y';
 
-  constructor(private dialogRef: NbDialogRef<AddDialogComponent>) {}
+  constructor(
+    private dialogRef: NbDialogRef<AddDialogComponent>,
+    private firebaseService: FirebaseService,
+    private toastService: NbToastrService
+  ) {}
 
   /** Toggles favorite flag */
   toggle(checked: boolean) {
@@ -43,6 +48,20 @@ export class AddDialogComponent {
     this.valid = nameIsValid && goalIsValid && dateIsValid;
   }
 
+  /** Deletes friend  */
+  delete() {
+    this.firebaseService
+      .removeFriend(this.newFriend)
+      .then(() => {
+        this.primaryToast('Success', 'Deleted Friend');
+        this.close();
+      })
+      .catch(() => {
+        this.failureToast('Failed', 'Failed to delete friend');
+        this.close();
+      });
+  }
+
   /** Returns new friend object to create/update */
   submit() {
     if (this.valid && this.dirty) {
@@ -53,5 +72,15 @@ export class AddDialogComponent {
   /** Closes dialog without a friend object */
   close() {
     this.dialogRef.close();
+  }
+
+  /** Displayed primary toast with given messages */
+  private primaryToast(title: string, message: string) {
+    this.toastService.primary(title, message);
+  }
+
+  /** Displayed warning toast with given messages */
+  private failureToast(title: string, message: string) {
+    this.toastService.warning(title, message);
   }
 }

@@ -1,5 +1,8 @@
 <nb-card>
-  <nb-card-header> Create Friend </nb-card-header>
+  <nb-card-header>
+    <ng-container *ngIf="!editMode"> Create </ng-container>
+    <ng-container *ngIf="editMode"> Update </ng-container></nb-card-header
+  >
   <nb-card-body>
     <div class="friend-inputs">
       <!-- Name -->
@@ -55,12 +58,23 @@
   </nb-card-body>
   <nb-card-footer>
     <div class="button-pane">
+      <div class="delete-button">
+        <button
+          *ngIf="editMode"
+          nbButton
+          size="small"
+          status="danger"
+          (click)="delete()"
+        >
+          Delete
+        </button>
+      </div>
       <button nbButton size="small" (click)="close()">Cancel</button>
       <button
         nbButton
         size="small"
-        [disabled]="!dirty && !valid"
         status="primary"
+        [disabled]="!dirty && !valid"
         (click)="submit()"
       >
         <ng-container *ngIf="editMode"> Update </ng-container>
