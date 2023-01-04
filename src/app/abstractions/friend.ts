@@ -19,12 +19,16 @@ export class Friend {
   /** Need to catch up */
   needsAttention?: boolean;
 
+  /** File name of the avatar image */
+  avatarId?: string;
+
   constructor(
     id?: string,
     name?: string,
     favorite?: boolean,
     goalDays?: number,
     lastCaughtUp?: Date | Timestamp,
+    avatarId?: string,
     needsAttention?: boolean
   ) {
     this.id = getId(id);
@@ -32,6 +36,7 @@ export class Friend {
     this.favorite = getFavorite(favorite);
     this.goalDays = getGoal(goalDays);
     this.lastCaughtUp = getLastCaughtUp(lastCaughtUp);
+    this.avatarId = getAvatarId(avatarId);
     this.needsAttention = getAttention(this.goalDays, this.lastCaughtUp);
   }
 }
@@ -80,6 +85,15 @@ function getLastCaughtUp(date: Date | Timestamp): Date {
     return date;
   } else {
     return new Date();
+  }
+}
+
+/** Returns last caught up date to set */
+function getAvatarId(id: string): string {
+  if (id) {
+    return id;
+  } else {
+    return '';
   }
 }
 

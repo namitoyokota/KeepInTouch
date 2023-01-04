@@ -23,6 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { LayoutComponent } from './layout/layout.component';
+import { SelectAvatarComponent } from './select-avatar/select-avatar.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { LayoutComponent } from './layout/layout.component';
     CardComponent,
     AddDialogComponent,
     LayoutComponent,
+    SelectAvatarComponent,
   ],
   imports: [
     BrowserModule,

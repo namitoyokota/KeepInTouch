@@ -48,6 +48,12 @@
         <nb-datepicker #datePicker [max]="today"></nb-datepicker>
       </div>
 
+      <!-- Avatar Selection -->
+      <select-avatar
+        [selectedAvatar]="newFriend.avatarId"
+        (avatarChanged)="newFriend.avatarId = $event"
+      ></select-avatar>
+
       <!-- Favorite -->
       <nb-checkbox
         [checked]="newFriend.favorite"

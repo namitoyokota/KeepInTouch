@@ -1,0 +1,27 @@
+:host {
+  display: grid;
+  grid-template-rows: min-content auto;
+  row-gap: 20px;
+
+  .button-pane {
+    display: grid;
+    grid-template-columns: auto min-content;
+    column-gap: 10px;
+  }
+
+  .avatar-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10px;
+    row-gap: 10px;
+
+    .avatar {
+      border-radius: 5px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #f7f7f7;
+      }
+    }
+  }
+}
