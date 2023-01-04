@@ -53,6 +53,7 @@ export class FirebaseService {
         favorite: newFriend.favorite,
         goalDays: newFriend.goalDays,
         lastCaughtUp: newFriend.lastCaughtUp,
+        avatarId: newFriend.avatarId,
       })
         .then(() => {
           this.getFriends();
@@ -119,7 +120,8 @@ export class FirebaseService {
         doc.data()['name'],
         doc.data()['favorite'],
         doc.data()['goalDays'],
-        doc.data()['lastCaughtUp']
+        doc.data()['lastCaughtUp'],
+        doc.data()['avatarId']
       );
     });
     this.friends.next(friends);

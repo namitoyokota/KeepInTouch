@@ -1,27 +1,25 @@
 :host {
+  max-height: 175px;
+  overflow-y: auto;
   display: grid;
-  grid-template-rows: min-content auto;
-  row-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
 
-  .button-pane {
-    display: grid;
-    grid-template-columns: auto min-content;
-    column-gap: 10px;
-  }
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 3px solid white;
 
-  .avatar-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 10px;
-    row-gap: 10px;
+    &.selected {
+      border-color: #99ccff;
+    }
 
-    .avatar {
-      border-radius: 5px;
-
-      &:hover {
-        cursor: pointer;
-        background-color: #f7f7f7;
-      }
+    &:hover {
+      cursor: pointer;
+      background-color: #f7f7f7;
     }
   }
 }

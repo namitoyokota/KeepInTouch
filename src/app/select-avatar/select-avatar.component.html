@@ -1,21 +1,12 @@
-<div class="button-pane">
-  <!-- Open List Button -->
-  <button nbButton (click)="toggleList()">Select Avatar</button>
-
-  <!-- Currently Selected Avatar -->
-  <div *ngIf="selectedAvatar" class="avatar-thumbnail">
-    <img height="40px" [src]="'assets/avatars/' + selectedAvatar + '.png'" />
-  </div>
-</div>
-
-<!-- Avatar List -->
-<div *ngIf="isSelectingAvatar" class="avatar-list">
-  <div *ngFor="let avatarId of avatarList" class="avatar">
-    <img
-      height="150px"
-      width="150px"
-      [src]="'assets/avatars/' + avatarId + '.png'"
-      (click)="selectAvatar(avatarId)"
-    />
-  </div>
+<div
+  *ngFor="let avatarId of avatarList"
+  class="avatar"
+  [class.selected]="avatarId === selectedAvatar"
+>
+  <img
+    height="75px"
+    width="75px"
+    [src]="'assets/avatars/' + avatarId + '.png'"
+    (click)="selectAvatar(avatarId)"
+  />
 </div>

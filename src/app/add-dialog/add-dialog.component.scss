@@ -14,5 +14,5 @@
   display: grid;
   grid-template-columns: auto repeat(2, min-content);
   column-gap: 10px;
-  justify-content: right;
+  justify-items: left;
 }
