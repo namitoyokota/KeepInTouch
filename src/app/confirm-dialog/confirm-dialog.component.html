@@ -1,0 +1,16 @@
+<nb-card>
+  <nb-card-header>
+    {{ title }}
+  </nb-card-header>
+  <nb-card-body>
+    {{ subtitle }}
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="button-pane">
+      <button nbButton size="small" (click)="no()">Cancel</button>
+      <button nbButton size="small" status="danger" (click)="yes()">
+        Continue
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>

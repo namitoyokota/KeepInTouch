@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NbDialogRef, NbToastrService } from '@nebular/theme';
+import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
 import { Friend } from '../abstractions/friend';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { FirebaseService } from '../services/firebase.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class AddDialogComponent {
 
   constructor(
     private dialogRef: NbDialogRef<AddDialogComponent>,
+    private dialogService: NbDialogService,
     private firebaseService: FirebaseService,
     private toastService: NbToastrService
   ) {}
@@ -40,17 +42,19 @@ export class AddDialogComponent {
     return nameIsValid && goalIsValid && dateIsValid;
   }
 
-  /** Deletes friend  */
+  /** Open delete confirm dialog */
   delete() {
-    this.firebaseService
-      .removeFriend(this.newFriend)
-      .then(() => {
-        this.primaryToast('Success', 'Deleted Friend');
-        this.close();
+    this.dialogService
+      .open(ConfirmDialogComponent, {
+        context: {
+          title: 'Are you sure?',
+          subtitle: 'This action cannot be reverted.',
+        },
       })
-      .catch(() => {
-        this.failureToast('Failed', 'Failed to delete friend');
-        this.close();
+      .onClose.subscribe((answer) => {
+        if (answer) {
+          this.deleteFriend();
+        }
       });
   }
 
@@ -62,6 +66,20 @@ export class AddDialogComponent {
   /** Closes dialog without a friend object */
   close() {
     this.dialogRef.close();
+  }
+
+  /** Deletes friend  */
+  private deleteFriend() {
+    this.firebaseService
+      .removeFriend(this.newFriend)
+      .then(() => {
+        this.primaryToast('Success', 'Deleted Friend');
+        this.close();
+      })
+      .catch(() => {
+        this.failureToast('Failed', 'Failed to delete friend');
+        this.close();
+      });
   }
 
   /** Displayed primary toast with given messages */

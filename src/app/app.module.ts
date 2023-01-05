@@ -22,6 +22,7 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SelectAvatarComponent } from './select-avatar/select-avatar.component';
 
@@ -32,6 +33,7 @@ import { SelectAvatarComponent } from './select-avatar/select-avatar.component';
     AddDialogComponent,
     LayoutComponent,
     SelectAvatarComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
