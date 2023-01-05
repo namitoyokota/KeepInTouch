@@ -11,6 +11,7 @@ import {
   getDocs,
   getFirestore,
   QuerySnapshot,
+  updateDoc,
 } from 'firebase/firestore/lite';
 
 import { BehaviorSubject } from 'rxjs';
@@ -45,7 +46,7 @@ export class FirebaseService {
   }
 
   /** Create a new friend in the database */
-  addFriend(newFriend: Friend): Promise<void> {
+  async addFriend(newFriend: Friend): Promise<void> {
     return new Promise((resolve, reject) => {
       addDoc(this.friendsCollection, {
         id: newFriend.id,
@@ -67,12 +68,33 @@ export class FirebaseService {
   }
 
   /** Update an existing friend in the database */
-  updateFriend(friend: Friend) {
-    // TODO: add
+  async updateFriend(friend: Friend): Promise<void> {
+    const friendDoc = this.findFriendDoc(friend);
+
+    console.log(friendDoc);
+
+    return new Promise((resolve, reject) => {
+      updateDoc(friendDoc, {
+        id: friend.id,
+        name: friend.name,
+        favorite: friend.favorite,
+        goalDays: friend.goalDays,
+        lastCaughtUp: friend.lastCaughtUp,
+        avatarId: friend.avatarId,
+      })
+        .then(() => {
+          this.getFriends();
+          resolve();
+        })
+        .catch((error) => {
+          console.warn(error);
+          reject();
+        });
+    });
   }
 
   /** Removes an existing friend from the database */
-  removeFriend(friend: Friend): Promise<void> {
+  async removeFriend(friend: Friend): Promise<void> {
     const friendDoc = this.findFriendDoc(friend);
     return new Promise((resolve, reject) => {
       deleteDoc(friendDoc)
