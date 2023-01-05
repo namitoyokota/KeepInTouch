@@ -80,7 +80,7 @@
         nbButton
         size="small"
         status="primary"
-        [disabled]="!dirty && !valid"
+        [disabled]="!checkValid()"
         (click)="submit()"
       >
         <ng-container *ngIf="editMode"> Update </ng-container>
