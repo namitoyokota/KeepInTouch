@@ -13,6 +13,9 @@ export class AppComponent {
   /** Flag to indicate when searching */
   isSearching = false;
 
+  /** Flag to indicate when data is loading */
+  isLoading$ = this.firebaseService.isLoading$;
+
   constructor(
     private firebaseService: FirebaseService,
     private dialogService: NbDialogService,

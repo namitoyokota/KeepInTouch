@@ -31,8 +31,12 @@
   </nb-layout-header>
 
   <!-- Main Content -->
-  <nb-layout-column>
+  <nb-layout-column class="main-content">
     <layout [isSearching]="isSearching"></layout>
+
+    <div class="spinner" *ngIf="isLoading$ | async">
+      <img height="75px" src="assets/circles.svg" />
+    </div>
   </nb-layout-column>
 
   <!-- Footer -->

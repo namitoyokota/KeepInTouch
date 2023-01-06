@@ -28,6 +28,12 @@ export class FirebaseService {
   /** List of existing friends */
   public friends$ = this.friends.asObservable();
 
+  /** Flag to indicate when API call is being made */
+  private isLoading = new BehaviorSubject<boolean>(false);
+
+  /** Flag to indicate when API call is being made */
+  public isLoading$ = this.isLoading.asObservable();
+
   /** Firebase app to access database */
   private firebaseApp: FirebaseApp;
 
@@ -47,6 +53,8 @@ export class FirebaseService {
 
   /** Create a new friend in the database */
   async addFriend(newFriend: Friend): Promise<void> {
+    this.startLoading();
+
     return new Promise((resolve, reject) => {
       addDoc(this.friendsCollection, {
         id: newFriend.id,
@@ -56,12 +64,14 @@ export class FirebaseService {
         lastCaughtUp: newFriend.lastCaughtUp,
         avatarId: newFriend.avatarId,
       })
-        .then(() => {
-          this.getFriends();
+        .then(async () => {
+          await this.getFriends();
+          this.stopLoading();
           resolve();
         })
         .catch((error) => {
           console.warn(error);
+          this.stopLoading();
           reject();
         });
     });
@@ -69,9 +79,9 @@ export class FirebaseService {
 
   /** Update an existing friend in the database */
   async updateFriend(friend: Friend): Promise<void> {
-    const friendDoc = this.findFriendDoc(friend);
+    this.startLoading();
 
-    console.log(friendDoc);
+    const friendDoc = this.findFriendDoc(friend);
 
     return new Promise((resolve, reject) => {
       updateDoc(friendDoc, {
@@ -82,12 +92,14 @@ export class FirebaseService {
         lastCaughtUp: friend.lastCaughtUp,
         avatarId: friend.avatarId,
       })
-        .then(() => {
-          this.getFriends();
+        .then(async () => {
+          await this.getFriends();
+          this.stopLoading();
           resolve();
         })
         .catch((error) => {
           console.warn(error);
+          this.stopLoading();
           reject();
         });
     });
@@ -95,15 +107,20 @@ export class FirebaseService {
 
   /** Removes an existing friend from the database */
   async removeFriend(friend: Friend): Promise<void> {
+    this.startLoading();
+
     const friendDoc = this.findFriendDoc(friend);
+
     return new Promise((resolve, reject) => {
       deleteDoc(friendDoc)
-        .then(() => {
-          this.getFriends();
+        .then(async () => {
+          await this.getFriends();
+          this.stopLoading();
           resolve();
         })
         .catch((error) => {
           console.warn(error);
+          this.stopLoading();
           reject();
         });
     });
@@ -147,5 +164,15 @@ export class FirebaseService {
       );
     });
     this.friends.next(friends);
+  }
+
+  /** Turn on loading flag */
+  private startLoading(): void {
+    this.isLoading.next(true);
+  }
+
+  /** Turn off loading flag */
+  private stopLoading(): void {
+    this.isLoading.next(false);
   }
 }
