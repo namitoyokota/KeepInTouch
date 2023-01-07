@@ -1,0 +1,18 @@
+:host {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+
+  .icons {
+    display: flex;
+    column-gap: 10px;
+  }
+
+  nb-icon {
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+    }
+  }
+}

@@ -25,6 +25,8 @@ import { CardComponent } from './card/card.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SelectAvatarComponent } from './select-avatar/select-avatar.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { SelectAvatarComponent } from './select-avatar/select-avatar.component';
     LayoutComponent,
     SelectAvatarComponent,
     ConfirmDialogComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

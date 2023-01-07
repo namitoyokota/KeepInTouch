@@ -22,11 +22,6 @@ export class AppComponent {
     private toastService: NbToastrService
   ) {}
 
-  /** Shows or hides search bar */
-  toggleSearch(): void {
-    this.isSearching = !this.isSearching;
-  }
-
   /** Opens dialog to create a new friend */
   openDialog() {
     this.dialogService

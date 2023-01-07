@@ -1,33 +1,10 @@
 <nb-layout>
   <!-- Header -->
   <nb-layout-header fixed>
-    <div class="header-pane">
-      <!-- Search Icon -->
-      <nb-icon
-        icon="search-outline"
-        nbTooltip="Search Friend"
-        nbTooltipPlacement="bottom"
-        (click)="toggleSearch()"
-      ></nb-icon>
-
-      <!-- Project Name -->
-      <div class="title">Keep in Touch</div>
-
-      <!-- Action Pane -->
-      <div class="icons">
-        <nb-icon
-          icon="plus-circle-outline"
-          nbTooltip="Add Friend"
-          nbTooltipPlacement="bottom"
-          (click)="openDialog()"
-        ></nb-icon>
-        <nb-icon
-          icon="person-outline"
-          nbTooltip="Account"
-          nbTooltipPlacement="bottom"
-        ></nb-icon>
-      </div>
-    </div>
+    <header
+      (onSearchToggle)="isSearching = $event"
+      (createNew)="openDialog()"
+    ></header>
   </nb-layout-header>
 
   <!-- Main Content -->
@@ -41,8 +18,6 @@
 
   <!-- Footer -->
   <nb-layout-footer fixed>
-    <a href="https://github.com/namitoyokota/KeepInTouch" target="_blank">
-      GitHub
-    </a>
+    <footer></footer>
   </nb-layout-footer>
 </nb-layout>
