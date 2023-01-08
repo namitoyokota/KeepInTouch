@@ -18,15 +18,18 @@ import {
   NbToastrModule,
   NbTooltipModule,
 } from '@nebular/theme';
-import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CardComponent } from './card/card.component';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { LayoutComponent } from './layout/layout.component';
-import { SelectAvatarComponent } from './select-avatar/select-avatar.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { AuthenticationComponent } from './pages/authentication/authentication.component';
+import { AddDialogComponent } from './pages/home/add-dialog/add-dialog.component';
+import { ConfirmDialogComponent } from './pages/home/add-dialog/confirm-dialog/confirm-dialog.component';
+import { SelectAvatarComponent } from './pages/home/add-dialog/select-avatar/select-avatar.component';
+import { FooterComponent } from './pages/home/footer/footer.component';
+import { HeaderComponent } from './pages/home/header/header.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CardComponent } from './pages/home/layout/card/card.component';
+import { LayoutComponent } from './pages/home/layout/layout.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { FooterComponent } from './footer/footer.component';
     ConfirmDialogComponent,
     HeaderComponent,
     FooterComponent,
+    HomeComponent,
+    LandingComponent,
+    AuthenticationComponent,
   ],
   imports: [
     BrowserModule,

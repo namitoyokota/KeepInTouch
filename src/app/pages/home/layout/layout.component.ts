@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Friend } from '../abstractions/friend';
-import { FirebaseService } from '../services/firebase.service';
+import { Friend } from '../../../abstractions/friend';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'layout',

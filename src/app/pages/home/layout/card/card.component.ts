@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
-import { Friend } from '../abstractions/friend';
-import { AddDialogComponent } from '../add-dialog/add-dialog.component';
-import { FirebaseService } from '../services/firebase.service';
+import { Friend } from '../../../../abstractions/friend';
+import { FirebaseService } from '../../../../services/firebase.service';
+import { AddDialogComponent } from '../../add-dialog/add-dialog.component';
 
 @Component({
   selector: 'card',

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AvatarImageFilenames } from '../constants/avatar-images';
+import { AvatarImageFilenames } from '../../../../constants/avatar-images';
 
 @Component({
   selector: 'select-avatar',
@@ -18,6 +18,7 @@ export class SelectAvatarComponent {
 
   constructor() {}
 
+  /** Emits event for avatar selection change */
   selectAvatar(avatarId: string): void {
     if (avatarId === this.selectedAvatar) {
       this.avatarChanged.emit('');

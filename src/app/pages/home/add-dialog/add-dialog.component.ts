@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
-import { Friend } from '../abstractions/friend';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { FirebaseService } from '../services/firebase.service';
+import { Friend } from '../../../abstractions/friend';
+import { FirebaseService } from '../../../services/firebase.service';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @Component({
   templateUrl: './add-dialog.component.html',
