@@ -5,7 +5,6 @@ import { FirebaseService } from '../../services/firebase.service';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
 @Component({
-  selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
@@ -21,6 +20,11 @@ export class HomeComponent {
     private dialogService: NbDialogService,
     private toastService: NbToastrService
   ) {}
+
+  /** On init lifecycle hook */
+  ngOnInit(): void {
+    // TODO: check if user is logged in. Else, back to auth page.
+  }
 
   /** Opens dialog to create a new friend */
   openDialog() {

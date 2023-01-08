@@ -1,9 +1,12 @@
-<p>landing works!</p>
+<nb-card>
+  <nb-card-header>Landing Page</nb-card-header>
 
-<div>
-  <button (click)="goToAuthenticationPage()">auth</button>
-</div>
+  <nb-card-body> Content coming soon! </nb-card-body>
 
-<div>
-  <button (click)="goToHomePage()">home</button>
-</div>
+  <nb-card-footer>
+    <button nbButton size="small" (click)="goToAuthenticationPage()">
+      Authentication
+    </button>
+    <button nbButton size="small" (click)="goToHomePage()">Home</button>
+  </nb-card-footer>
+</nb-card>

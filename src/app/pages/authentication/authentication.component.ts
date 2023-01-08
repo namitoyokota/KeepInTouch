@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
-  selector: 'app-authentication',
   templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.scss'],
 })
