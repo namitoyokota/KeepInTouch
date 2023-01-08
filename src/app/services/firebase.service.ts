@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FirebaseApp, initializeApp } from 'firebase/app';
+import { FirebaseApp, FirebaseError, initializeApp } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
   signOut,
+  UserCredential,
 } from 'firebase/auth';
 import {
   addDoc,
@@ -56,46 +57,49 @@ export class FirebaseService {
     this.getFriends();
   }
 
+  /** Creates new account with provided credentials */
   async signUp(email: string, password: string): Promise<void> {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-        // Signed in
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        console.warn(error);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+    return new Promise((resolve, reject) => {
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential: UserCredential) => {
+          console.log(userCredential);
+          resolve();
+        })
+        .catch((error: FirebaseError) => {
+          console.warn(error);
+          reject();
+        });
+    });
   }
 
+  /** Logs in user with provided credentials */
   async signIn(email: string, password: string): Promise<void> {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
+    return new Promise((resolve, reject) => {
+      signInWithEmailAndPassword(getAuth(), email, password)
+        .then((userCredential: UserCredential) => {
+          console.log(userCredential);
+          resolve();
+        })
+        .catch((error: FirebaseError) => {
+          console.warn(error);
+          reject();
+        });
+    });
   }
 
+  /** Logs out currently logged in user */
   async signOut(): Promise<void> {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+    return new Promise((resolve, reject) => {
+      signOut(getAuth())
+        .then(() => {
+          resolve();
+        })
+        .catch((error) => {
+          console.warn(error);
+          reject();
+        });
+    });
   }
 
   /** Create a new friend in the database */
