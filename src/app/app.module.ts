@@ -30,6 +30,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CardComponent } from './pages/home/layout/card/card.component';
 import { LayoutComponent } from './pages/home/layout/layout.component';
 import { LandingComponent } from './pages/landing/landing.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { LandingComponent } from './pages/landing/landing.component';
     HomeComponent,
     LandingComponent,
     AuthenticationComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
