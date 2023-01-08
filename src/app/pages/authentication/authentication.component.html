@@ -1,1 +1,33 @@
-<p>authentication works!</p>
+<nb-card>
+  <nb-card-header> Sign Up Sign In</nb-card-header>
+  <nb-card-body>
+    <div class="friend-inputs">
+      <!-- Name -->
+      <div class="input-field">
+        <span>Email</span>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Email"
+          [(ngModel)]="email"
+        />
+      </div>
+
+      <div class="input-field">
+        <span>Password</span>
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Password"
+          [(ngModel)]="password"
+        />
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton size="small" (click)="signUp()">Sign Up</button>
+    <button nbButton size="small" (click)="signIn()">Sign In</button>
+  </nb-card-footer>
+</nb-card>
