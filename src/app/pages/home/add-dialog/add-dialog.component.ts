@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
+import { NbDialogRef, NbDialogService } from '@nebular/theme';
+import { ToastService } from 'src/app/services/toast.service';
 import { Friend } from '../../../abstractions/friend';
 import { FirebaseService } from '../../../services/firebase.service';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
@@ -25,7 +26,7 @@ export class AddDialogComponent {
     private dialogRef: NbDialogRef<AddDialogComponent>,
     private dialogService: NbDialogService,
     private firebaseService: FirebaseService,
-    private toastService: NbToastrService
+    private toastService: ToastService
   ) {}
 
   /** Toggles favorite flag */
@@ -73,22 +74,12 @@ export class AddDialogComponent {
     this.firebaseService
       .removeFriend(this.newFriend)
       .then(() => {
-        this.primaryToast('Success', 'Deleted Friend');
+        this.toastService.primaryToast('Success', 'Deleted Friend');
         this.close();
       })
       .catch(() => {
-        this.failureToast('Failed', 'Failed to delete friend');
+        this.toastService.failureToast('Failed', 'Failed to delete friend');
         this.close();
       });
-  }
-
-  /** Displayed primary toast with given messages */
-  private primaryToast(title: string, message: string) {
-    this.toastService.primary(title, message);
-  }
-
-  /** Displayed warning toast with given messages */
-  private failureToast(title: string, message: string) {
-    this.toastService.warning(title, message);
   }
 }

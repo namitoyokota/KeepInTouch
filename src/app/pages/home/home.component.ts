@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { NbDialogService } from '@nebular/theme';
 import { NavigationService } from 'src/app/services/navigation.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { Friend } from '../../abstractions/friend';
 import { FirebaseService } from '../../services/firebase.service';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
@@ -20,7 +21,7 @@ export class HomeComponent {
     private firebaseService: FirebaseService,
     private navigationService: NavigationService,
     private dialogService: NbDialogService,
-    private toastService: NbToastrService
+    private toastService: ToastService
   ) {}
 
   /** On init lifecycle hook */
@@ -47,20 +48,13 @@ export class HomeComponent {
     this.firebaseService
       .addFriend(newFriend)
       .then(() => {
-        this.successToast('Success', 'Added friend');
+        this.toastService.successToast('Success', 'Added friend');
       })
       .catch(() => {
-        this.failureToast('Failure', 'Failed attempting to add a friend');
+        this.toastService.failureToast(
+          'Failure',
+          'Failed attempting to add a friend'
+        );
       });
-  }
-
-  /** Displayed success toast with given messages */
-  private successToast(title: string, message: string) {
-    this.toastService.success(title, message);
-  }
-
-  /** Displayed warning toast with given messages */
-  private failureToast(title: string, message: string) {
-    this.toastService.warning(title, message);
   }
 }

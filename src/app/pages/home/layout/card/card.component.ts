@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { NbDialogService } from '@nebular/theme';
+import { ToastService } from 'src/app/services/toast.service';
 import { Friend } from '../../../../abstractions/friend';
 import { FirebaseService } from '../../../../services/firebase.service';
 import { AddDialogComponent } from '../../add-dialog/add-dialog.component';
@@ -16,7 +17,7 @@ export class CardComponent {
   constructor(
     private firebaseService: FirebaseService,
     private dialogService: NbDialogService,
-    private toastService: NbToastrService
+    private toastService: ToastService
   ) {}
 
   /** Open edit friend dialog */
@@ -40,22 +41,16 @@ export class CardComponent {
     this.firebaseService
       .updateFriend(newFriend)
       .then(() => {
-        this.successToast('Success', 'Updated friend');
+        this.toastService.successToast('Success', 'Updated friend');
       })
       .catch(() => {
-        this.failureToast('Failure', 'Failed attempting to update a friend');
+        this.toastService.failureToast(
+          'Failure',
+          'Failed attempting to update a friend'
+        );
       });
   }
 
-  /** Displayed success toast with given messages */
-  private successToast(title: string, message: string) {
-    this.toastService.success(title, message);
-  }
-
-  /** Displayed warning toast with given messages */
-  private failureToast(title: string, message: string) {
-    this.toastService.warning(title, message);
-  }
   /** Deep copies the friend object */
   private deepCopy(friend: Friend) {
     return JSON.parse(JSON.stringify(friend));
