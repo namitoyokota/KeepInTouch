@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   templateUrl: './authentication.component.html',
@@ -15,7 +15,7 @@ export class AuthenticationComponent {
 
   constructor(
     private firebaseService: FirebaseService,
-    private router: Router
+    private navigationService: NavigationService
   ) {}
 
   /** Sign up user with firebase */
@@ -23,7 +23,7 @@ export class AuthenticationComponent {
     this.firebaseService
       .signUp(this.email, this.password)
       .then(() => {
-        this.goToHomePage();
+        this.navigationService.goToHomePage();
       })
       .catch(() => {});
   }
@@ -33,13 +33,8 @@ export class AuthenticationComponent {
     this.firebaseService
       .signIn(this.email, this.password)
       .then(() => {
-        this.goToHomePage();
+        this.navigationService.goToHomePage();
       })
       .catch(() => {});
-  }
-
-  /** Successful log in takes you to home */
-  private goToHomePage(): void {
-    this.router.navigate(['home']);
   }
 }

@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent {
-  constructor(private router: Router) {}
+  constructor(private navigationService: NavigationService) {}
 
-  // TODO: below methods need to be in a navigation.service
   /** Navigates user to authentication page */
   goToAuthenticationPage(): void {
-    this.router.navigate(['authentication']);
+    this.navigationService.goToAuthenticationPage();
   }
 
   /** Navigates user to home page */
   goToHomePage(): void {
-    this.router.navigate(['home']);
+    this.navigationService.goToHomePage();
   }
 }

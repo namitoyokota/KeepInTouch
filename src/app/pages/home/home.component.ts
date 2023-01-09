@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { Friend } from '../../abstractions/friend';
 import { FirebaseService } from '../../services/firebase.service';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
@@ -17,8 +17,8 @@ export class HomeComponent {
   isLoading$ = this.firebaseService.isLoading$;
 
   constructor(
-    private router: Router,
     private firebaseService: FirebaseService,
+    private navigationService: NavigationService,
     private dialogService: NbDialogService,
     private toastService: NbToastrService
   ) {}
@@ -27,7 +27,7 @@ export class HomeComponent {
   ngOnInit(): void {
     const userLoggedIn = !!this.firebaseService.currentUser;
     if (!userLoggedIn) {
-      this.goToAuthenticationPage();
+      this.navigationService.goToAuthenticationPage();
     }
   }
 
@@ -52,11 +52,6 @@ export class HomeComponent {
       .catch(() => {
         this.failureToast('Failure', 'Failed attempting to add a friend');
       });
-  }
-
-  /** User not logged in so go back to authentication page */
-  private goToAuthenticationPage(): void {
-    this.router.navigate(['authentication']);
   }
 
   /** Displayed success toast with given messages */
