@@ -28,6 +28,9 @@ import { environment } from '../environments/environment';
   providedIn: 'root',
 })
 export class FirebaseService {
+  /** Currently logged in user */
+  public currentUser: UserCredential = null;
+
   /** List of existing friends */
   private friends = new BehaviorSubject<Friend[]>([]);
 
@@ -64,6 +67,7 @@ export class FirebaseService {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential: UserCredential) => {
           console.log(userCredential);
+          this.currentUser = userCredential;
           resolve();
         })
         .catch((error: FirebaseError) => {
@@ -79,6 +83,7 @@ export class FirebaseService {
       signInWithEmailAndPassword(getAuth(), email, password)
         .then((userCredential: UserCredential) => {
           console.log(userCredential);
+          this.currentUser = userCredential;
           resolve();
         })
         .catch((error: FirebaseError) => {
@@ -93,6 +98,7 @@ export class FirebaseService {
     return new Promise((resolve, reject) => {
       signOut(getAuth())
         .then(() => {
+          this.currentUser = null;
           resolve();
         })
         .catch((error) => {
