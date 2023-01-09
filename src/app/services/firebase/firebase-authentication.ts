@@ -19,8 +19,11 @@ export class FirebaseAuthentication {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential: UserCredential) => {
-          console.log(userCredential);
           this.currentUser = userCredential;
+
+          // TODO: create new table for user
+          console.log(userCredential);
+
           resolve();
         })
         .catch((error: FirebaseError) => {
@@ -35,8 +38,10 @@ export class FirebaseAuthentication {
     return new Promise((resolve, reject) => {
       signInWithEmailAndPassword(getAuth(), email, password)
         .then((userCredential: UserCredential) => {
-          console.log(userCredential);
           this.currentUser = userCredential;
+
+          // TODO: get table for user
+
           resolve();
         })
         .catch((error: FirebaseError) => {
@@ -52,6 +57,9 @@ export class FirebaseAuthentication {
       signOut(getAuth())
         .then(() => {
           this.currentUser = null;
+
+          // TODO: delete table for user
+
           resolve();
         })
         .catch((error) => {
