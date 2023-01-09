@@ -33,7 +33,7 @@ export class LayoutComponent {
 
   /** On init lifecycle hook */
   ngOnInit() {
-    this.firebaseService.friends$.subscribe((friends) => {
+    this.firebaseService.database.friends$.subscribe((friends) => {
       this.resetList();
       this.friendsList = friends;
       this.updateLists();

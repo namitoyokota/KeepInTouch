@@ -71,7 +71,7 @@ export class AddDialogComponent {
 
   /** Deletes friend  */
   private deleteFriend() {
-    this.firebaseService
+    this.firebaseService.database
       .removeFriend(this.newFriend)
       .then(() => {
         this.toastService.primaryToast('Success', 'Deleted Friend');

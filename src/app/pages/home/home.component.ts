@@ -15,7 +15,7 @@ export class HomeComponent {
   isSearching = false;
 
   /** Flag to indicate when data is loading */
-  isLoading$ = this.firebaseService.isLoading$;
+  isLoading = this.firebaseService.database.isLoading;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -26,7 +26,7 @@ export class HomeComponent {
 
   /** On init lifecycle hook */
   ngOnInit(): void {
-    const userLoggedIn = !!this.firebaseService.currentUser;
+    const userLoggedIn = !!this.firebaseService.authentication.currentUser;
     if (!userLoggedIn) {
       this.navigationService.goToAuthenticationPage();
     }
@@ -45,7 +45,7 @@ export class HomeComponent {
 
   /** Adds requested friend in the database */
   private submitFriend(newFriend: Friend) {
-    this.firebaseService
+    this.firebaseService.database
       .addFriend(newFriend)
       .then(() => {
         this.toastService.successToast('Success', 'Added friend');

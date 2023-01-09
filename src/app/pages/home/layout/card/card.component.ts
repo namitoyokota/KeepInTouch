@@ -40,7 +40,7 @@ export class CardComponent {
 
   /** Updates requested friend in the database */
   private updateFriend(newFriend: Friend) {
-    this.firebaseService
+    this.firebaseService.database
       .updateFriend(newFriend)
       .then(() => {
         this.toastService.successToast('Success', 'Updated friend');

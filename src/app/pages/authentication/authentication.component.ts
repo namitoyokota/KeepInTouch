@@ -20,7 +20,7 @@ export class AuthenticationComponent {
 
   /** Sign up user with firebase */
   signUp() {
-    this.firebaseService
+    this.firebaseService.authentication
       .signUp(this.email, this.password)
       .then(() => {
         this.navigationService.goToHomePage();
@@ -30,7 +30,7 @@ export class AuthenticationComponent {
 
   /** Sign in user with firebase */
   signIn() {
-    this.firebaseService
+    this.firebaseService.authentication
       .signIn(this.email, this.password)
       .then(() => {
         this.navigationService.goToHomePage();
