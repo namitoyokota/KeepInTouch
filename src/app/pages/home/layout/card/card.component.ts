@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
+import { HelperService } from 'src/app/services/helper.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Friend } from '../../../../abstractions/friend';
 import { FirebaseService } from '../../../../services/firebase.service';
@@ -17,7 +18,8 @@ export class CardComponent {
   constructor(
     private firebaseService: FirebaseService,
     private dialogService: NbDialogService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private helperService: HelperService
   ) {}
 
   /** Open edit friend dialog */
@@ -25,7 +27,7 @@ export class CardComponent {
     this.dialogService
       .open(AddDialogComponent, {
         context: {
-          newFriend: this.deepCopy(this.friend),
+          newFriend: this.helperService.deepCopy(this.friend),
           editMode: true,
         },
       })
@@ -49,10 +51,5 @@ export class CardComponent {
           'Failed attempting to update a friend'
         );
       });
-  }
-
-  /** Deep copies the friend object */
-  private deepCopy(friend: Friend) {
-    return JSON.parse(JSON.stringify(friend));
   }
 }
