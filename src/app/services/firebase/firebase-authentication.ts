@@ -1,6 +1,7 @@
 import { FirebaseError } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   getAuth,
   signInWithEmailAndPassword,
   signOut,
@@ -69,8 +70,7 @@ export class FirebaseAuthentication {
   /** Delete user's account and their data */
   async deleteAccount(): Promise<void> {
     return new Promise((resolve, reject) => {
-      // TODO: this needs to be updated to delete account
-      signOut(getAuth())
+      deleteUser(getAuth().currentUser)
         .then(() => {
           // TODO: delete table for user
           this.currentUser = null;

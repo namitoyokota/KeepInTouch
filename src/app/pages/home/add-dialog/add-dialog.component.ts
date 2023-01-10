@@ -3,7 +3,7 @@ import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { ToastService } from 'src/app/services/toast.service';
 import { Friend } from '../../../abstractions/friend';
 import { FirebaseService } from '../../../services/firebase.service';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   templateUrl: './add-dialog.component.html',

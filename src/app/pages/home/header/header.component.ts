@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { NbMenuService } from '@nebular/theme';
+import { NbDialogService, NbMenuService } from '@nebular/theme';
 import { filter, map } from 'rxjs';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { NavigationService } from 'src/app/services/navigation.service';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 enum ContextMenu {
   deleteAccount = 'Delete Account',
@@ -33,7 +34,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private firebaseService: FirebaseService,
     private navigationService: NavigationService,
-    private nbMenuService: NbMenuService
+    private nbMenuService: NbMenuService,
+    private dialogService: NbDialogService
   ) {}
 
   /** On init lifecycle hook */
@@ -84,10 +86,19 @@ export class HeaderComponent implements OnInit {
 
   /** Delete currently logged in user */
   private deleteAccount(): void {
-    // TODO: add confirmation dialog
-
-    this.firebaseService.authentication.deleteAccount().then(() => {
-      this.navigationService.goToAuthenticationPage();
-    });
+    this.dialogService
+      .open(ConfirmDialogComponent, {
+        context: {
+          title: 'Are you sure?',
+          subtitle: 'This action cannot be reverted.',
+        },
+      })
+      .onClose.subscribe((flag) => {
+        if (flag) {
+          this.firebaseService.authentication.deleteAccount().then(() => {
+            this.navigationService.goToAuthenticationPage();
+          });
+        }
+      });
   }
 }
