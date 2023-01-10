@@ -57,9 +57,23 @@ export class FirebaseAuthentication {
       signOut(getAuth())
         .then(() => {
           this.currentUser = null;
+          resolve();
+        })
+        .catch((error) => {
+          console.warn(error);
+          reject();
+        });
+    });
+  }
 
+  /** Delete user's account and their data */
+  async deleteAccount(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      // TODO: this needs to be updated to delete account
+      signOut(getAuth())
+        .then(() => {
           // TODO: delete table for user
-
+          this.currentUser = null;
           resolve();
         })
         .catch((error) => {
