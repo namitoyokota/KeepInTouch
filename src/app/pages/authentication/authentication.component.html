@@ -1,35 +1,57 @@
-<nb-card>
-  <nb-card-header> Sign Up Sign In</nb-card-header>
+<nb-layout>
+  <!-- Header -->
+  <nb-layout-header fixed>
+    <div class="header-pane">
+      <span>Authentication</span>
+    </div>
+  </nb-layout-header>
 
-  <nb-card-body>
-    <div class="friend-inputs">
-      <!-- Name -->
-      <div class="input-field">
-        <span>Email</span>
-        <input
-          type="text"
-          nbInput
-          fullWidth
-          placeholder="Email"
-          [(ngModel)]="email"
-        />
+  <!-- Main Content -->
+  <nb-layout-column class="main-content">
+    <div class="auth-form">
+      <!-- Title -->
+      <h1>Keep In Touch</h1>
+
+      <!-- Input Fields -->
+      <div class="auth-inputs">
+        <!-- Name -->
+        <div class="input-field">
+          <span>Email</span>
+          <input
+            type="text"
+            nbInput
+            fullWidth
+            placeholder="Email"
+            [(ngModel)]="email"
+          />
+        </div>
+
+        <div class="input-field">
+          <span>Password</span>
+          <input
+            type="text"
+            nbInput
+            fullWidth
+            placeholder="Password"
+            [(ngModel)]="password"
+            (keyup.enter)="signIn()"
+          />
+        </div>
       </div>
 
-      <div class="input-field">
-        <span>Password</span>
-        <input
-          type="text"
-          nbInput
-          fullWidth
-          placeholder="Password"
-          [(ngModel)]="password"
-        />
+      <!-- Submit Buttons -->
+      <div class="button-pane">
+        <button nbButton size="small" status="success" (click)="signUp()">
+          Sign Up
+        </button>
+
+        <button nbButton size="small" status="primary" (click)="signIn()">
+          Sign In
+        </button>
       </div>
     </div>
-  </nb-card-body>
+  </nb-layout-column>
 
-  <nb-card-footer>
-    <button nbButton size="small" (click)="signUp()">Sign Up</button>
-    <button nbButton size="small" (click)="signIn()">Sign In</button>
-  </nb-card-footer>
-</nb-card>
+  <!-- Footer -->
+  <nb-layout-footer fixed> </nb-layout-footer>
+</nb-layout>

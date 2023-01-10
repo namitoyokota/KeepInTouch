@@ -1,0 +1,30 @@
+.header-pane {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .auth-form {
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+    row-gap: 30px;
+    justify-items: center;
+
+    .auth-inputs {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+    }
+
+    .button-pane {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
