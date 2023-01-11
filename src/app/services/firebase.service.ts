@@ -45,8 +45,10 @@ export class FirebaseService {
   }
 
   private listenToDelete(): void {
-    this.mailbox.deleteCollection$.subscribe(() => {
-      // TODO: this.database.deleteCollection();
+    this.mailbox.deleteCollection$.subscribe((token: string) => {
+      if (token) {
+        this.database.deleteCollection();
+      }
     });
   }
 }

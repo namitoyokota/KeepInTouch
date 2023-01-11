@@ -67,6 +67,18 @@ export class FirebaseDatabase {
     this.friends.next(friends);
   }
 
+  /** Delete all friends in collection */
+  async deleteCollection(collectionId?: string): Promise<void> {
+    if (this.collectionId !== collectionId) {
+      await this.getFriends(collectionId);
+    }
+
+    const friendsToDelete = this.friends.getValue();
+    friendsToDelete.forEach(async (friend: Friend) => {
+      this.removeFriend(friend);
+    });
+  }
+
   /** Removes all loaded friends list */
   cleanFriends(): void {
     this.friends.next([]);
