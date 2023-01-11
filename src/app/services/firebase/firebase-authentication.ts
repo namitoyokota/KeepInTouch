@@ -3,28 +3,47 @@ import {
   createUserWithEmailAndPassword,
   deleteUser,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  UserCredential,
+  User,
 } from 'firebase/auth';
 import { FirebaseService } from '../firebase.service';
+import { NavigationService } from '../navigation.service';
 
 export class FirebaseAuthentication {
   /** Currently logged in user */
-  currentUser: UserCredential = null;
+  currentUser: User = null;
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(
+    private firebaseService: FirebaseService,
+    private navigationService: NavigationService
+  ) {}
+
+  /** Listen to change in log in state */
+  listenToAuthChange(): void {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user: User) => {
+      if (user) {
+        this.currentUser = user;
+        this.firebaseService.mailbox.retrieveCollection.next(
+          this.currentUser.uid
+        );
+        this.navigationService.goToHomePage();
+      } else {
+        this.currentUser = null;
+        this.firebaseService.mailbox.clearCollection.next();
+        this.navigationService.goToAuthenticationPage();
+      }
+    });
+  }
 
   /** Creates new account with provided credentials */
   async signUp(email: string, password: string): Promise<void> {
     return new Promise((resolve, reject) => {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential: UserCredential) => {
-          this.currentUser = userCredential;
-          this.firebaseService.mailbox.retrieveCollection.next(
-            this.currentUser.user.uid
-          );
+        .then(() => {
           resolve();
         })
         .catch((error: FirebaseError) => {
@@ -38,11 +57,7 @@ export class FirebaseAuthentication {
   async signIn(email: string, password: string): Promise<void> {
     return new Promise((resolve, reject) => {
       signInWithEmailAndPassword(getAuth(), email, password)
-        .then((userCredential: UserCredential) => {
-          this.currentUser = userCredential;
-          this.firebaseService.mailbox.retrieveCollection.next(
-            this.currentUser.user.uid
-          );
+        .then(() => {
           resolve();
         })
         .catch((error: FirebaseError) => {
@@ -57,8 +72,6 @@ export class FirebaseAuthentication {
     return new Promise((resolve, reject) => {
       signOut(getAuth())
         .then(() => {
-          this.currentUser = null;
-          this.firebaseService.mailbox.clearCollection.next();
           resolve();
         })
         .catch((error) => {
@@ -70,13 +83,12 @@ export class FirebaseAuthentication {
 
   /** Delete user's account and their data */
   async deleteAccount(): Promise<void> {
+    const userToDelete = getAuth().currentUser;
+
     return new Promise((resolve, reject) => {
-      deleteUser(getAuth().currentUser)
+      deleteUser(userToDelete)
         .then(() => {
-          this.firebaseService.mailbox.deleteCollection.next(
-            this.currentUser.user.uid
-          );
-          this.currentUser = null;
+          this.firebaseService.mailbox.deleteCollection.next(userToDelete.uid);
           resolve();
         })
         .catch((error) => {

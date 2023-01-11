@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { NavigationService } from 'src/app/services/navigation.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Friend } from '../../abstractions/friend';
 import { FirebaseService } from '../../services/firebase.service';
@@ -19,18 +18,9 @@ export class HomeComponent {
 
   constructor(
     private firebaseService: FirebaseService,
-    private navigationService: NavigationService,
     private dialogService: NbDialogService,
     private toastService: ToastService
   ) {}
-
-  /** On init lifecycle hook */
-  ngOnInit(): void {
-    const userLoggedIn = !!this.firebaseService.authentication.currentUser;
-    if (!userLoggedIn) {
-      this.navigationService.goToAuthenticationPage();
-    }
-  }
 
   /** Opens dialog to create a new friend */
   openDialog() {

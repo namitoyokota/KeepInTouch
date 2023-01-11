@@ -3,6 +3,7 @@ import { Mailbox } from '../abstractions/mailbox';
 
 import { FirebaseAuthentication } from './firebase/firebase-authentication';
 import { FirebaseDatabase } from './firebase/firebase-database';
+import { NavigationService } from './navigation.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +18,12 @@ export class FirebaseService {
   /** Workflow for sending and receiving messages */
   mailbox: Mailbox = new Mailbox();
 
-  constructor() {
-    this.authentication = new FirebaseAuthentication(this);
+  constructor(navigationService: NavigationService) {
+    this.authentication = new FirebaseAuthentication(this, navigationService);
     this.database = new FirebaseDatabase();
 
     this.initializeListeners();
+    this.authentication.listenToAuthChange();
   }
 
   private initializeListeners(): void {
