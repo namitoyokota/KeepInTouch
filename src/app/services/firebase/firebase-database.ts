@@ -37,9 +37,39 @@ export class FirebaseDatabase {
   /** Current state of the firebase database */
   private friendsSnapshot: QuerySnapshot<DocumentData>;
 
+  /** Collection id for the current user */
+  private collectionId: string;
+
   constructor() {
     this.initialize();
-    this.getFriends();
+  }
+
+  /** Gets the latest list of friends in the database */
+  async getFriends(collectionId?: string): Promise<void> {
+    if (collectionId) {
+      this.collectionId = collectionId;
+    }
+
+    this.friendsCollection = collection(this.firebaseDb, this.collectionId);
+    this.friendsSnapshot = await getDocs(this.friendsCollection);
+
+    const friends = this.friendsSnapshot.docs.map((doc) => {
+      return new Friend(
+        doc.data()['id'],
+        doc.data()['name'],
+        doc.data()['favorite'],
+        doc.data()['goalDays'],
+        doc.data()['lastCaughtUp'],
+        doc.data()['avatarId']
+      );
+    });
+
+    this.friends.next(friends);
+  }
+
+  /** Removes all loaded friends list */
+  cleanFriends(): void {
+    this.friends.next([]);
   }
 
   /** Create a new friend in the database */
@@ -137,25 +167,6 @@ export class FirebaseDatabase {
 
     // TODO: Added after going production
     // const analytics = getAnalytics(this.firebaseApp);
-  }
-
-  /** Gets the latest list of friends in the database */
-  private async getFriends() {
-    this.friendsCollection = collection(this.firebaseDb, 'friends');
-    this.friendsSnapshot = await getDocs(this.friendsCollection);
-
-    const friends = this.friendsSnapshot.docs.map((doc) => {
-      return new Friend(
-        doc.data()['id'],
-        doc.data()['name'],
-        doc.data()['favorite'],
-        doc.data()['goalDays'],
-        doc.data()['lastCaughtUp'],
-        doc.data()['avatarId']
-      );
-    });
-
-    this.friends.next(friends);
   }
 
   /** Turn on loading flag */

@@ -7,12 +7,13 @@ import {
   signOut,
   UserCredential,
 } from 'firebase/auth';
+import { FirebaseService } from '../firebase.service';
 
 export class FirebaseAuthentication {
   /** Currently logged in user */
   currentUser: UserCredential = null;
 
-  constructor() {}
+  constructor(private firebaseService: FirebaseService) {}
 
   /** Creates new account with provided credentials */
   async signUp(email: string, password: string): Promise<void> {
@@ -21,10 +22,9 @@ export class FirebaseAuthentication {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential: UserCredential) => {
           this.currentUser = userCredential;
-
-          // TODO: create new table for user
-          console.log(userCredential);
-
+          this.firebaseService.mailbox.retrieveCollection.next(
+            this.currentUser.user.uid
+          );
           resolve();
         })
         .catch((error: FirebaseError) => {
@@ -40,9 +40,9 @@ export class FirebaseAuthentication {
       signInWithEmailAndPassword(getAuth(), email, password)
         .then((userCredential: UserCredential) => {
           this.currentUser = userCredential;
-
-          // TODO: get table for user
-
+          this.firebaseService.mailbox.retrieveCollection.next(
+            this.currentUser.user.uid
+          );
           resolve();
         })
         .catch((error: FirebaseError) => {
@@ -58,6 +58,7 @@ export class FirebaseAuthentication {
       signOut(getAuth())
         .then(() => {
           this.currentUser = null;
+          this.firebaseService.mailbox.clearCollection.next();
           resolve();
         })
         .catch((error) => {
@@ -72,7 +73,9 @@ export class FirebaseAuthentication {
     return new Promise((resolve, reject) => {
       deleteUser(getAuth().currentUser)
         .then(() => {
-          // TODO: delete table for user
+          this.firebaseService.mailbox.deleteCollection.next(
+            this.currentUser.user.uid
+          );
           this.currentUser = null;
           resolve();
         })
